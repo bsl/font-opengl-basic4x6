@@ -52,3 +52,9 @@ executable show-font-basic4x6
 
   hs-source-dirs:
     src
+
+-- -- -- -- -- -- -- -- -- --
+
+source-repository head
+  type:     git
+  location: git://github.com/bsl/GLFW-b.git
