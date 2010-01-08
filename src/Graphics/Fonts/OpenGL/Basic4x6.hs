@@ -6,12 +6,13 @@ module Graphics.Fonts.OpenGL.Basic4x6
   )
   where
 
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 import qualified Graphics.Rendering.OpenGL as GL
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-digit0, digit1, digit2, digit3, digit4, digit5, digit6, digit7, digit8, digit9 :: IO ()
-
+digit0 :: IO ()
 digit0 =
     renderQuads
       [ (-2,3),  (-2,-3), (-1,-3), (-1,3)
@@ -20,11 +21,13 @@ digit0 =
       , (1,3),   (1,-3),  (2,-3),  (2,3)
       ]
 
+digit1 :: IO ()
 digit1 =
     renderQuads
       [ (-0.5,3), (-0.5,-3), (0.5,-3), (0.5,3)
       ]
 
+digit2 :: IO ()
 digit2 =
     renderQuads
       [ (-2,3),  (-2,2),  (1,2),   (1,3)
@@ -34,6 +37,7 @@ digit2 =
       , (-1,-2), (-1,-3), (2,-3),  (2,-2)
       ]
 
+digit3 :: IO ()
 digit3 =
     renderQuads
       [ (-2,3),  (-2,2),  (1,2),  (1,3)
@@ -42,6 +46,7 @@ digit3 =
       , (-2,-2), (-2,-3), (1,-3), (1,-2)
       ]
 
+digit4 :: IO ()
 digit4 =
     renderQuads
       [ (-2,3), (-2,-1), (-1,-1), (-1,3)
@@ -49,6 +54,7 @@ digit4 =
       , (1,3),  (1,-3),  (2,-3),  (2,3)
       ]
 
+digit5 :: IO ()
 digit5 =
     renderQuads
       [ (-1,3),  (-1,2),  (2,2),   (2,3)
@@ -58,6 +64,7 @@ digit5 =
       , (-2,-2), (-2,-3), (1,-3),  (1,-2)
       ]
 
+digit6 :: IO ()
 digit6 =
     renderQuads
       [ (-1,3),  (-1,2),  (2,2),   (2,3)
@@ -67,12 +74,14 @@ digit6 =
       , (1,0),   (1,-3),  (2,-3),  (2,0)
       ]
 
+digit7 :: IO ()
 digit7 =
     renderQuads
       [ (-2,3), (-2,2), (1,2),  (1,3)
       , (1,3),  (1,-3), (2,-3), (2,3)
       ]
 
+digit8 :: IO ()
 digit8 =
     renderQuads
       [ (-2,3),  (-2,-3), (-1,-3), (-1,3)
@@ -82,6 +91,7 @@ digit8 =
       , (1,3),   (1,-3),  (2,-3),  (2,3)
       ]
 
+digit9 :: IO ()
 digit9 =
     renderQuads
       [ (-2,3), (-2,-1), (-1,-1), (-1,3)
@@ -92,14 +102,14 @@ digit9 =
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-exclamation, percent, plus, minus, period, slash, colon, lessThan, equal, greaterThan :: IO ()
-
+exclamation :: IO ()
 exclamation =
     renderQuads
       [ (-0.5,3),  (-0.5,-1), (0.5,-1), (0.5,3)
       , (-0.5,-2), (-0.5,-3), (0.5,-3), (0.5,-2)
       ]
 
+percent :: IO ()
 percent =
     renderQuads
       [ (1,3),  (-2,-3), (-1,-3), (2,3)
@@ -107,6 +117,7 @@ percent =
       , (1,-2), (1,-3),  (2,-3),  (2,-2)
       ]
 
+plus :: IO ()
 plus =
     renderQuads
       [ (-2,0.5),  (-2,-0.5),  (-0.5,-0.5), (-0.5,0.5)
@@ -114,39 +125,46 @@ plus =
       , (0.5,0.5), (0.5,-0.5), (2,-0.5),    (2,0.5)
       ]
 
+minus :: IO ()
 minus =
     renderQuads
       [ (-2,0.5), (-2,-0.5), (2,-0.5), (2,0.5)
       ]
 
+period :: IO ()
 period =
     renderQuads
       [ (-0.5,-2), (-0.5,-3), (0.5,-3), (0.5,-2)
       ]
 
+slash :: IO ()
 slash =
     renderQuads
       [ (1,3), (-2,-3), (-1,-3), (2,3)
       ]
 
+colon :: IO ()
 colon =
     renderQuads
       [ (-0.5,1.5),  (-0.5,0.5),  (0.5,0.5),  (0.5,1.5)
       , (-0.5,-0.5), (-0.5,-1.5), (0.5,-1.5), (0.5,-0.5)
       ]
 
+lessThan :: IO ()
 lessThan =
     renderQuads
       [ (1,3),  (-2,0), (-1,0), (2,3)
       , (-2,0), (1,-3), (2,-3), (-1,0)
       ]
 
+equal :: IO ()
 equal =
     renderQuads
       [ (-2,1.5),  (-2,0.5),  (2,0.5),  (2,1.5)
       , (-2,-0.5), (-2,-1.5), (2,-1.5), (2,-0.5)
       ]
 
+greaterThan :: IO ()
 greaterThan =
     renderQuads
       [ (-2,3), (1,0),   (2,0),   (-1,3)
@@ -155,10 +173,6 @@ greaterThan =
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-renderQuads :: [(Double,Double)] -> IO ()
+renderQuads :: [(GL.GLfloat, GL.GLfloat)] -> IO ()
 renderQuads =
-    GL.renderPrimitive GL.Quads . mapM_ (\(x, y) ->
-                                          let x' = realToFrac x :: GL.GLfloat
-                                              y' = realToFrac y :: GL.GLfloat
-                                          in GL.vertex (GL.Vertex2 x' y')
-                                        )
+    GL.renderPrimitive GL.Quads . mapM_ (\(x, y) -> GL.vertex (GL.Vertex2 x y))

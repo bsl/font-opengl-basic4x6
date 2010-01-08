@@ -1,12 +1,18 @@
 module Main (main) where
 
-import Control.Monad (liftM2, unless, when)
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+import Control.Exception (finally)
+import Control.Monad     (liftM2, unless, when)
 
 import Graphics.Rendering.OpenGL (($=))
+
 import qualified Graphics.Rendering.OpenGL as GL
 import qualified Graphics.UI.GLFW          as GLFW
 
 import Graphics.Fonts.OpenGL.Basic4x6
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 main :: IO ()
 main = withGraphics showFont
@@ -77,11 +83,8 @@ showFont = do
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 withGraphics :: IO a -> IO a
-withGraphics action = do
-    startGraphics
-    a <- action
-    stopGraphics
-    return a
+withGraphics action =
+    (startGraphics >> action) `finally` stopGraphics
 
 startGraphics :: IO ()
 startGraphics = do
@@ -89,16 +92,14 @@ startGraphics = do
     GLFW.openWindow GLFW.defaultDisplayOptions
       { GLFW.displayOptions_width          = 600
       , GLFW.displayOptions_height         = 600
-      , GLFW.displayOptions_numRedBits     = 8
-      , GLFW.displayOptions_numGreenBits   = 8
-      , GLFW.displayOptions_numBlueBits    = 8
-      , GLFW.displayOptions_numFsaaSamples = Just 16
+      , GLFW.displayOptions_numRedBits     = 5
+      , GLFW.displayOptions_numGreenBits   = 5
+      , GLFW.displayOptions_numBlueBits    = 5
+      , GLFW.displayOptions_numFsaaSamples = Just 4
       }
-    GL.blend                 $= GL.Enabled
-    GL.blendFunc             $= (GL.SrcAlpha, GL.OneMinusSrcAlpha)
-    GL.multisample           $= GL.Enabled
-    GL.polygonSmooth         $= GL.Enabled
-    GL.hint GL.PolygonSmooth $= GL.Nicest
+    GL.blend       $= GL.Enabled
+    GL.blendFunc   $= (GL.SrcAlpha, GL.OneMinusSrcAlpha)
+    GL.multisample $= GL.Enabled
 
 stopGraphics :: IO ()
 stopGraphics = do
