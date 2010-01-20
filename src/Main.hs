@@ -92,9 +92,9 @@ startGraphics = do
     _ <- GLFW.openWindow GLFW.defaultDisplayOptions
       { GLFW.displayOptions_width          = 600
       , GLFW.displayOptions_height         = 600
-      , GLFW.displayOptions_numRedBits     = 5
-      , GLFW.displayOptions_numGreenBits   = 5
-      , GLFW.displayOptions_numBlueBits    = 5
+      , GLFW.displayOptions_numRedBits     = 8
+      , GLFW.displayOptions_numGreenBits   = 8
+      , GLFW.displayOptions_numBlueBits    = 8
       , GLFW.displayOptions_numFsaaSamples = Just 4
       }
     GL.blend       $= GL.Enabled
