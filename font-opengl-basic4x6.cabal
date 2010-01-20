@@ -1,5 +1,5 @@
 name:        font-opengl-basic4x6
-version:     0.0.1
+version:     0.0.2
 category:    Graphics
 synopsis:    Basic4x6 font for OpenGL
 description: Basic4x6 font for OpenGL containing digits and symbols. It is
