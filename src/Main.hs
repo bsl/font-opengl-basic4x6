@@ -88,8 +88,8 @@ withGraphics action =
 
 startGraphics :: IO ()
 startGraphics = do
-    GLFW.initialize
-    GLFW.openWindow GLFW.defaultDisplayOptions
+    _ <- GLFW.initialize
+    _ <- GLFW.openWindow GLFW.defaultDisplayOptions
       { GLFW.displayOptions_width          = 600
       , GLFW.displayOptions_height         = 600
       , GLFW.displayOptions_numRedBits     = 5
